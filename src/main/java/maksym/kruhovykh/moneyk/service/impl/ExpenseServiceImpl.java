@@ -50,13 +50,13 @@ public class ExpenseServiceImpl implements ExpenseService {
     }
 
     @Override
-    public ExpenseDto updateExpense(ExpenseDto expenseDto) {
-        if (repository.findById(expenseDto.getId()).isPresent()) {
+    public ExpenseDto updateExpense(Long id, ExpenseDto expenseDto) {
+        if (repository.findById(id).isPresent()) {
             Expense mappedExpense = mapper.mapDtoToEntity(expenseDto);
             Expense savedExpense = repository.save(mappedExpense);
             return mapper.mapEntityToDto(savedExpense);
         } else {
-            throw new EntityNotFoundException(String.format(COULD_NOT_UPDATE_ENTITY_WITH_ID, expenseDto.getId()));
+            throw new EntityNotFoundException(String.format(COULD_NOT_UPDATE_ENTITY_WITH_ID, id));
         }
     }
 

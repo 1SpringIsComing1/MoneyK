@@ -53,13 +53,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto updateUser(UserDto userDto) {
-        if (repository.findById(userDto.getId()).isPresent()) {
+    public UserDto updateUser(Long id,UserDto userDto) {
+        if (repository.findById(id).isPresent()) {
             User mappedUser = mapper.mapDtoToEntity(userDto);
             User savedUser = repository.save(mappedUser);
             return mapper.mapEntityToDto(savedUser);
         } else {
-            throw new EntityNotFoundException(String.format(COULD_NOT_UPDATE_ENTITY_WITH_ID, userDto.getId()));
+            throw new EntityNotFoundException(String.format(COULD_NOT_UPDATE_ENTITY_WITH_ID,id));
         }
     }
 

@@ -12,7 +12,7 @@ public interface ExpenseService {
 
     List<ExpenseDto> getAllExpenses();
 
-    ExpenseDto updateExpense(ExpenseDto expenseDto);
+    ExpenseDto updateExpense(Long id, ExpenseDto expenseDto);
 
     void deleteExpenseById(Long id);
 }
