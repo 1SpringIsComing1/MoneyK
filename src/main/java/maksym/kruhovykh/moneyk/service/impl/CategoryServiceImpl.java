@@ -34,7 +34,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryDto getCategoryById(Long id) {
+    public CategoryDto findCategoryById(Long id) {
         Category category = repository.findById(id).orElseThrow(() -> {
             String message = String.format(ENTITY_NOT_FOUND_WITH_ID, id);
             log.info(message);
@@ -50,7 +50,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryDto updateCategory(CategoryDto categoryDto) {
+    public CategoryDto updateCategory(Long id, CategoryDto categoryDto) {
         if (repository.findById(categoryDto.getId()).isPresent()) {
             Category mappedCategory = mapper.mapDtoToEntity(categoryDto);
             Category savedCategory = repository.save(mappedCategory);

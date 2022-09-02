@@ -9,6 +9,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.OK;
 
 @RequiredArgsConstructor
 @RestController
@@ -23,5 +24,16 @@ public class CategoryController {
         return categoryService.createCategory(categoryDto);
     }
 
+    @GetMapping("/{categoryId}")
+    @ResponseStatus(OK)
+    CategoryDto findById(@PathVariable("categoryId") Long categoryId) {
+        return categoryService.findCategoryById(categoryId);
+    }
+
+    @PutMapping("/{categoryId}")
+    @ResponseStatus(OK)
+    CategoryDto update(@PathVariable("categoryId") Long categoryId, @Validated @RequestBody CategoryDto categoryDto) {
+        return categoryService.updateCategory(categoryId, categoryDto);
+    }
 }
 
