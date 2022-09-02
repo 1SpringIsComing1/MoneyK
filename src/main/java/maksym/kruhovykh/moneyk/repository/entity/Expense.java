@@ -24,7 +24,6 @@ public class Expense implements Serializable {
     @ManyToOne
     @JoinColumn(name = "category_id")
     Category category;
-
     @OneToOne
     User user;
     Double price;
