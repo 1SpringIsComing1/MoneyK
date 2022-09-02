@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import maksym.kruhovykh.moneyk.dto.CategoryDto;
 import maksym.kruhovykh.moneyk.service.CategoryService;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.http.HttpStatus.CREATED;
@@ -18,7 +19,7 @@ public class CategoryController {
 
     @PostMapping
     @ResponseStatus(CREATED)
-    CategoryDto createCategory(@RequestBody CategoryDto categoryDto) {
+    CategoryDto createCategory(@Validated @RequestBody CategoryDto categoryDto) {
         return categoryService.createCategory(categoryDto);
     }
 

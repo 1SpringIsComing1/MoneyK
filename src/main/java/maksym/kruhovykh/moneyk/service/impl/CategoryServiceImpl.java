@@ -23,38 +23,38 @@ import static maksym.kruhovykh.moneyk.shared.Constants.ExceptionMessages.ENTITY_
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class CategoryServiceImpl implements CategoryService {
-    CategoryRepository categoryRepository;
-    CategoryMapper categoryMapper;
+    CategoryRepository repository;
+    CategoryMapper mapper;
 
     @Override
     public CategoryDto createCategory(CategoryDto categoryDto) {
-        Category mappedCategory = categoryMapper.mapDtoToEntity(categoryDto);
-        Category category = categoryRepository.save(mappedCategory);
-        return categoryMapper.mapEntityToDto(category);
+        Category mappedCategory = mapper.mapDtoToEntity(categoryDto);
+        Category category = repository.save(mappedCategory);
+        return mapper.mapEntityToDto(category);
     }
 
     @Override
     public CategoryDto getCategoryById(Long id) {
-        Category category = categoryRepository.findById(id).orElseThrow(() -> {
+        Category category = repository.findById(id).orElseThrow(() -> {
             String message = String.format(ENTITY_NOT_FOUND_WITH_ID, id);
             log.info(message);
             return new EntityNotFoundException(message);
         });
 
-        return categoryMapper.mapEntityToDto(category);
+        return mapper.mapEntityToDto(category);
     }
 
     @Override
     public List<CategoryDto> getAllCategories() {
-        return categoryRepository.findAll().stream().map(categoryMapper::mapEntityToDto).collect(Collectors.toList());
+        return repository.findAll().stream().map(mapper::mapEntityToDto).collect(Collectors.toList());
     }
 
     @Override
     public CategoryDto updateCategory(CategoryDto categoryDto) {
-        if (categoryRepository.findById(categoryDto.getId()).isPresent()) {
-            Category mappedCategory = categoryMapper.mapDtoToEntity(categoryDto);
-            Category savedCategory = categoryRepository.save(mappedCategory);
-            return categoryMapper.mapEntityToDto(savedCategory);
+        if (repository.findById(categoryDto.getId()).isPresent()) {
+            Category mappedCategory = mapper.mapDtoToEntity(categoryDto);
+            Category savedCategory = repository.save(mappedCategory);
+            return mapper.mapEntityToDto(savedCategory);
         } else {
             throw new EntityNotFoundException(String.format(COULD_NOT_UPDATE_ENTITY_WITH_ID, categoryDto.getId()));
         }
@@ -62,6 +62,6 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void deleteCategoryById(Long id) {
-        categoryRepository.deleteById(id);
+        repository.deleteById(id);
     }
 }
