@@ -8,8 +8,9 @@ import maksym.kruhovykh.moneyk.service.CategoryService;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import static org.springframework.http.HttpStatus.CREATED;
-import static org.springframework.http.HttpStatus.OK;
+import java.util.List;
+
+import static org.springframework.http.HttpStatus.*;
 
 @RequiredArgsConstructor
 @RestController
@@ -34,6 +35,18 @@ public class CategoryController {
     @ResponseStatus(OK)
     CategoryDto update(@PathVariable("categoryId") Long categoryId, @Validated @RequestBody CategoryDto categoryDto) {
         return categoryService.updateCategory(categoryId, categoryDto);
+    }
+
+    @DeleteMapping("/{categoryId}")
+    @ResponseStatus(NO_CONTENT)
+    void delete(@PathVariable("categoryId") Long categoryId) {
+        categoryService.deleteCategoryById(categoryId);
+    }
+
+    @GetMapping
+    @ResponseStatus(OK)
+    List<CategoryDto> findAll() {
+        return categoryService.getAllCategories();
     }
 }
 
