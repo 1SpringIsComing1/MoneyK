@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import maksym.kruhovykh.moneyk.dto.CategoryDto;
-import maksym.kruhovykh.moneyk.repository.CategoryRepository;
 import maksym.kruhovykh.moneyk.repository.entity.Category;
 import maksym.kruhovykh.moneyk.service.CategoryService;
 import maksym.kruhovykh.moneyk.service.mapper.CategoryMapper;
@@ -19,7 +18,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class CategoryServiceImpl implements CategoryService {
-    CategoryRepository categoryRepository;
     CategoryMapper categoryMapper;
 
     @PostConstruct
@@ -29,8 +27,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public CategoryDto createCategory(CategoryDto categoryDto) {
         Category mappedCategory = categoryMapper.mapDtoToEntity(categoryDto);
-        Category category = categoryRepository.save(mappedCategory);
-        return categoryMapper.mapEntityToDto(category);
+        return categoryMapper.mapEntityToDto(mappedCategory);
     }
 
     @Override

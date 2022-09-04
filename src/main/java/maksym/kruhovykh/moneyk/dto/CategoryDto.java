@@ -1,6 +1,6 @@
 package maksym.kruhovykh.moneyk.dto;
 
-import com.sun.istack.NotNull;
+import lombok.NonNull;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Data;
@@ -11,7 +11,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class CategoryDto {
     Long id;
-    @NotNull
+//    @NotNull
     String categoryName;
 
 }

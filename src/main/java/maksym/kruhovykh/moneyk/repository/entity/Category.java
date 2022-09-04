@@ -3,7 +3,7 @@ package maksym.kruhovykh.moneyk.repository.entity;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import javax.persistence.*;
+//import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
@@ -13,19 +13,19 @@ import java.util.List;
 @Getter
 @EqualsAndHashCode
 @Builder
-@Table(name = "category")
-@Entity
+//@Table(name = "category")
+//@Entity
 public class Category implements Serializable {
     private static final long serialVersionUID = 4419994801749960468L;
 
-    @Id
-    @GeneratedValue
+//    @Id
+//    @GeneratedValue
     Long id;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     String categoryName;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+//    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     List<Expense> expenses;
 
 }
