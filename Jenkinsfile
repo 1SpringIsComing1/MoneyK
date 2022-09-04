@@ -10,9 +10,11 @@ pipeline {
                     echo 'Now Archiving...'
                     archiveArtifacts artifacts: '**/target/*.war'
                 }
-            }
         }
+    }
+}
 
+/*
 void setBuildStatus(String message, String state) {
     step([
         $class: "GitHubCommitStatusSetter",
@@ -21,4 +23,4 @@ void setBuildStatus(String message, String state) {
         errorHandlers: [[$class: "ChangingBuildStatusErrorHandler", result: "UNSTABLE"]],
         statusResultSource: [$class: "ConditionalStatusResultSource", results: [[$class: "AnyBuildResult", message: message, state: state]]]
     ]);
-}
+} */
